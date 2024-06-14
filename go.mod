@@ -3,7 +3,9 @@ module poc-go-etl-consumer
 go 1.21.1
 
 require (
+	github.com/caarlos0/env/v11 v11.0.1
 	github.com/gofiber/fiber/v2 v2.52.4
+	github.com/joho/godotenv v1.5.1
 	go.uber.org/fx v1.22.0
 	golang.org/x/exp v0.0.0-20240604190554-fc45aab8b7f8
 )

@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"poc-go-etl-consumer/configs"
 	etlconsumerservice "poc-go-etl-consumer/pkg/etl_consumer"
 	etlhandler "poc-go-etl-consumer/pkg/etl_consumer"
 
@@ -10,10 +11,11 @@ import (
 	"golang.org/x/exp/slog"
 )
 
-func NewFiber(lc fx.Lifecycle, etl *etlhandler.Handler) *fiber.App {
+func NewFiber(lc fx.Lifecycle, config *configs.Configs, etl *etlhandler.Handler) *fiber.App {
 
 	port := ":3000"
 	app := fiber.New()
+
 	api := app.Group("/api")
 	v1 := api.Group("/v1")
 
@@ -37,6 +39,7 @@ func main() {
 	fx.New(
 
 		fx.Provide(etlconsumerservice.NewHandler),
+		fx.Provide(configs.NewConfigs),
 		fx.Invoke(NewFiber),
 	).Run()
 
